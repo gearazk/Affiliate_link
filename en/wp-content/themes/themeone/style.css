@@ -1,0 +1,17 @@
+/*
+Theme Name: ThemeOne
+
+Author: _Me
+Author URI: https://facebook.com/3teikey
+Description: Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer.
+Version: 1.5
+License: GNU General Public License v2 or later
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+body{
+	background: silver;
+	
+}

@@ -1,0 +1,27 @@
+
+body{
+	padding: 100px;
+
+}
+
+
+.item_title{
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.item_sale{
+	font-size: 20px;
+}
+.item_price{
+	font-size: 20px;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+}
+.input-search
+{
+	margin: -5px;
+}
+.se-form{
+	width: 400px;
+}
