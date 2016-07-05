@@ -256,7 +256,15 @@ class wp_noexternallinks_parser extends wp_noexternallinks
             if (stripos(wp_get_referer(), $this->options['site']) !== 0)#oh, god, it happened!
                 $this->show_referer_warning();
         }
-        $this->show_redirect_page(affiliate_url($url));
+
+        /// Custom redirect url for AP
+        if(strpos($url,'adayroi')!== false)
+            $ap_host = $this->options['site_host_adayroi'];
+        else if(strpos($url,'tiki')!== false)
+            $ap_host = $this->options['site_host_tiki'];
+
+        ///
+        $this->show_redirect_page(affiliate_url($url,$ap_host));
     }
 
 

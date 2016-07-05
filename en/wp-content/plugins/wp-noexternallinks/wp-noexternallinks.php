@@ -66,19 +66,38 @@ class wp_noexternallinks
             }
             /*else echo 'nothing changed ;_;';*/
         }
+
     }
 
     function GetOptionInfo()
     {
         return array(
+            ///////////////////////////////////////////////////
+            array('old_name' => 'affiliate_site_host',
+                  'new_name' => 'site_host_tiki', 
+                  'def_value' => 0,
+                  'type' => 'slt', 
+                  'name' => __('Tiki.vn', 'wp-noexternallinks'),
+                  'grp' => 'affiliate'),
+            array('old_name' => 'affiliate_site_host',
+                  'new_name' => 'site_host_adayroi', 
+                  'def_value' => 0,
+                  'type' => 'slt', 
+                  'name' => __('Adayroi', 'wp-noexternallinks'),
+                  'grp' => 'affiliate'),
+            //////////////////////////////// New Affiliate 
             array('old_name' => 'noexternallinks_mask_mine', 'new_name' => 'mask_mine', 'def_value' => 1, 'type' => 'chk', 'name' => __('Mask links in posts and pages', 'wp-noexternallinks'), 'grp' => 'what'),
             array('old_name' => 'noexternallinks_mask_comment', 'new_name' => 'mask_comment', 'def_value' => 1, 'type' => 'chk', 'name' => __('Mask links in comments', 'wp-noexternallinks'), 'grp' => 'what'),
             array('old_name' => 'noexternallinks_mask_author', 'new_name' => 'mask_author', 'def_value' => 1, 'type' => 'chk', 'name' => __('Mask comments authors`s homepage links', 'wp-noexternallinks'), 'grp' => 'what'),
             array('new_name' => 'mask_rss', 'def_value' => 0, 'type' => 'chk', 'name' => __('Mask links in your RSS post content', 'wp-noexternallinks') . ' ' . __('(may result in invalid RSS if used with some masking options)', 'wp-noexternallinks'), 'grp' => 'what'),
             array('new_name' => 'mask_rss_comment', 'def_value' => 0, 'type' => 'chk', 'name' => __('Mask links in RSS comments', 'wp-noexternallinks') . ' ' . __('(may result in invalid RSS if used with some masking options)', 'wp-noexternallinks'), 'grp' => 'what'),
+
             array('old_name' => 'noexternallinks_add_nofollow', 'new_name' => 'add_nofollow', 'def_value' => 1, 'type' => 'chk', 'name' => __('Add <b>rel=nofollow</b> for masked links (for google)', 'wp-noexternallinks'), 'grp' => 'common'),
+
             array('old_name' => 'noexternallinks_add_blank', 'new_name' => 'add_blank', 'def_value' => 1, 'type' => 'chk', 'name' => __('Add <b>target="blank"</b> for all links to other sites (links will open in new window)', 'wp-noexternallinks'), 'grp' => 'common'),
+
             array('old_name' => 'noexternallinks_put_noindex', 'new_name' => 'put_noindex', 'def_value' => 0, 'type' => 'chk', 'name' => __('Surround masked links with <b>&lt;noindex&gt;link&lt;/noindex&gt;</b> tag (for yandex search engine)', 'wp-noexternallinks'), 'grp' => 'common'),
+
             array('new_name' => 'put_noindex_comment', 'def_value' => 0, 'type' => 'chk', 'name' => __('Surround masked links with comment <b>&lt;!--noindex--&gt;link&lt;!--/noindex--&gt;</b> (for yandex search engine, better then noindex tag because valid)', 'wp-noexternallinks'), 'grp' => 'common'),
             array('old_name' => 'noexternallinks_disable_mask_links', 'new_name' => 'disable_mask_links', 'def_value' => 0, 'type' => 'chk', 'name' => __('No redirect', 'wp-noexternallinks'), 'grp' => 'type'),
             array('old_name' => 'noexternallinks_link_separator', 'new_name' => 'LINK_SEP', 'def_value' => 'goto', 'type' => 'txt', 'name' => __('Link separator for redirects (default="goto")', 'wp-noexternallinks'), 'grp' => 'common'),
@@ -86,6 +105,8 @@ class wp_noexternallinks
             array('new_name' => 'fullmask', 'def_value' => 0, 'type' => 'chk', 'name' => __('Mask ALL links in document (can slow down your blog and conflict with some cache and other plugins. Not recommended).', 'wp-noexternallinks'), 'grp' => 'what'),
             array('new_name' => 'stats', 'def_value' => 0, 'type' => 'chk', 'name' => __('Log all outgoing clicks.', 'wp-noexternallinks'), 'grp' => 'common'),
             array('new_name' => 'keep_stats', 'def_value' => 30, 'type' => 'txt', 'name' => __('Days to keep clicks stats', 'wp-noexternallinks'), 'grp' => 'common'),
+
+
             array('new_name' => 'no302', 'def_value' => 0, 'type' => 'chk', 'name' => __('Use javascript redirect', 'wp-noexternallinks'), 'grp' => 'type'),
             array('new_name' => 'redtime', 'def_value' => 3, 'type' => 'txt', 'name' => __('Redirect time (seconds)', 'wp-noexternallinks'), 'grp' => 'java'),
             array('new_name' => 'redtxt', 'def_value' => 'This page demonstrates link redirect with "WP-NoExternalLinks" plugin. You will be redirected in 3 seconds. Otherwise, please click on <a href="LINKURL">this link</a>.', 'type' => 'text', 'name' => __('Custom redirect text. Use word "LINKURL" where you want to use redirect url. For example, <b>CLICK &lt;a href="LINKURL"&gt;HERE NOW&lt;/a&gt;</b>', 'wp-noexternallinks'), 'grp' => 'java'),
@@ -167,6 +188,7 @@ class wp_noexternallinks
                 update_option('wp_noexternallinks_flush', time());
             }
         }
+        
     }
 }
 

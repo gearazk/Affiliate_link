@@ -66,6 +66,7 @@ class wp_noexternallinks_admin extends wp_noexternallinks
     function update()
     {
         $this->options = $_REQUEST['options'];
+
         $this->update_options();
         echo '<div class="updated">' . __('Options updated.', 'wp-noexternallinks') . '</div>';
         $this->load_options();
@@ -186,6 +187,11 @@ class wp_noexternallinks_admin extends wp_noexternallinks
             echo '<h3>' . __('Configuration for javascript redirects (if enabled)', 'wp-noexternallinks') . '</h3>';
             $this->show_option_group($opt, 'java');
 
+            echo '<h2>Affiliate Link </h2>';
+            $this->show_option_group($opt, 'affiliate');
+
+
+
             ?><input type="submit" name="submit" value="<?php _e('Save Changes', 'wp-noexternallinks') ?>"
                      class="button-primary"/>
         </form>
@@ -201,7 +207,14 @@ class wp_noexternallinks_admin extends wp_noexternallinks
             }
         }
     }
+    function check_AP($val_string,$ap_string)
+    {
+        if($val_string === $ap_string)
+            return "selected =`selected`";
+        else
+            return "";
 
+    }
     function show_option($arr)
     {
         if ($arr['type'] == 'chk') {
@@ -210,18 +223,31 @@ class wp_noexternallinks_admin extends wp_noexternallinks
                 echo ' checked';
             echo '>' . $arr['name'];
         } elseif ($arr['type'] == 'txt') {
+
             echo '<br>' . $arr['name'] . ':<br><input type="text" name="options[' . $arr['new_name'] . ']" value="' . $this->options[$arr['new_name']] . '">';
+
         } elseif ($arr['type'] == 'text') {
             echo '<p>' . $arr['name'] . ':</p>';
             echo '<textarea name="options[' . $arr['new_name'] . ']" class="large-text code" rows="6" cols="50">' . $this->options[$arr['new_name']] . '</textarea>';
+        } elseif ($arr['type'] == 'slt') {
+
+            echo "<b>".$arr['name']."</b><br>";
+            echo '<select name="options['.$arr['new_name'].']" value="' . $this->options[$arr['new_name']] .'">
+
+            <option name="options['.$arr['new_name'].']" value="masoffer" '. $this->check_AP($this->options[$arr['new_name']],'masoffer') .'>MasOffer</option>
+            <option name="options['.$arr['new_name'].']" value="accesstrade" '. $this->check_AP($this->options[$arr['new_name']],'accesstrade') .'  >AccessTrade</option>
+
+            </select><br>';
+
         }
     }
-
+ 
     function admin_options()
     {
         echo '<div class="wrap"><h2>WP-NoExternalLinks</h2>';
-        if ($_REQUEST['submit'])
+        if ($_REQUEST['submit']){
             $this->update();
+        }
         if ($_REQUEST['action'] == 'stats')
             $this->view_stats();
         else

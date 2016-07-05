@@ -99,6 +99,14 @@ class AccesstradeAffiliateURLFactory extends BaseAffiliateURLFactory
 
 	public static $factory_id = "accesstrade_affiliate_factory";
 
+	function affiliate_url($url)
+	{
+		$ahead_link = "http://click.accesstrade.vn/adv.php?rk=0001qr0004m1&url=";
+		$main_link = $url;
+		$after_link = "&utm_source=accesstradevn&traffic_id={clickid}";
+		$full_link =  $main_link . $after_link;
+		return $ahead_link . urlencode($full_link);
+	}
 }
 
 class MasofferAffiliateURLFactory extends BaseAffiliateURLFactory
@@ -146,20 +154,16 @@ function affiliate_factory($key = BaseAffiliateURLFactory::factory_id)
 	return $AFFILIATE_FACTORIES[0];
 }
 
-function default_affiliate_factory()
-{
-	return affiliate_factory("masoffer_affiliate_factory");
-}
 
-function affiliate_url($url = "")
+function affiliate_url($url = "", $ap_host)
 {
-	$factory = default_affiliate_factory();
+	$factory = affiliate_factory($ap_host."_affiliate_factory");
 	
 	$affiliate_url = $factory->affiliate_url($url);
 
-	if ($affiliate_url == "") {
-		$affiliate_url = "";
-	}
+	// if ($affiliate_url == "") {
+	// 	$affiliate_url = "";
+	// }
 
 	return $affiliate_url;
 }
